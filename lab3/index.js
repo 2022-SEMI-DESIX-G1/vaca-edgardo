@@ -41,7 +41,7 @@ for (i = 0, len = strin.length; i < len; ++i) {
     counts[ch] = count ? count + 1 : 1;       
 }
     for (ch in counts) {
-        alert(ch + " count: " + counts[ch]);
+        alert(ch + ": " + counts[ch]);
     }
 }
 
@@ -52,3 +52,13 @@ const string = prompt('Coloque su cadena: ');
 const value_string = checkTheString(string);
 
 console.log(value_string);
+
+
+// Verifica si un año es bisiesto o no
+function isLeapYear() {
+    var year= document.getElementById("year").value;
+      
+    document.getElementById("verify").innerHTML 
+        = (year % 100 === 0) ? (year % 400 === 0)
+                             : (year % 4 === 0);
+}
