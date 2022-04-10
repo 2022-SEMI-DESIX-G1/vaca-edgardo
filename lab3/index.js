@@ -26,17 +26,17 @@ console.log(value);
 
 // Función que retorna cantidad de caractéres de una cadena
 
-function checkTheString(str){
+function checkTheString(strin){
 
 var counts = {};
 
 // Declaración de variables
-var ch, index, len, count;
+var ch, i, len, count;
 
 // Loop dependiendo la cantidad de string
-for (index = 0, len = str.length; index < len; ++index) {
+for (i = 0, len = strin.length; i < len; ++i) {
     // obtener los caracteres 
-    ch = str.charAt(index); 
+    ch = strin.charAt(i); 
     count = counts[ch];
     counts[ch] = count ? count + 1 : 1;       
 }
