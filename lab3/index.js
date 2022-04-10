@@ -62,3 +62,42 @@ function isLeapYear() {
         = (year % 100 === 0) ? (year % 400 === 0)
                              : (year % 4 === 0);
 }
+
+// Retornar el total de la suma de los números primos, en base al número dado por el usuario.
+
+function isPrime(value){
+
+    // Verificar si un número es primo
+    for(var i=2; i < value; i++){
+      if(value % i === 0){
+        return false;
+      }
+    }
+    return true;
+  }
+
+
+  // Función para sumar los números primos
+  function sumPrimes(num) {
+    var ans = 0;
+  
+    // Loop 
+
+    for(var i=2; i <= num; i++){   
+  
+      // Sumar solo números primos
+      if(isPrime(i)){
+        ans += i;
+      }
+      var anst = ans + 1;
+    }
+    return alert('Dado el número ' + num + ', el total es: ' + anst);
+  }
+
+  // Mensaje que le indica al usuario número a colocar
+const nump = prompt('Coloque su número a verificar: ');
+
+// Llama a la función mandando el número
+const val = sumPrimes(nump);
+
+console.log(val);
