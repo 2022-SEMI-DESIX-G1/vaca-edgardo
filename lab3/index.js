@@ -1,21 +1,24 @@
-// Función del palindromo. Se envía (cadena y el exponente o la base)
-function isPalindrome(cad, exp) {
+// Función que verífica si un número es palíndromo o no
+function checkPalindrome(num) {
 
-    // Creación y asignación de cadenas a comparar
-    var v1 = 0;
-    var v2 = cad;
+    // Verífica la longitud del número
+    const len = num.length;
 
-    // La cadena por lo menos debe tener un carácter
-    while (cad > 0) {
-        v1 = v1 * exp + cad % exp;
-        cad = cad / exp | 0;
+    // Uso de loop 
+    for (let i = 0; i < len / 2; i++) {
+
+        // Verífica si el primer y el último número son iguales
+        if (num[i] !== num[len - 1 - i]) {
+            return alert('El número ' + num + ' no es un palíndromo.');
+        }
     }
-    // Verifica si la cadena es un palindromo, es decir si de adelante para atrás es igual es porque lo es.
-    return v1 === v2;
+    return alert('El número ' + num + ' es un palíndromo.');
 }
 
-// Se retorna a ver si es base 2 o 10 el palindromo.
-var isBaseTwoPalindrome = (t) => {
-    parseInt(t);
-    return isPalindrome(t, 2) && isPalindrome(t, 10);
-}
+// Mensaje que le indica al usuario el número a colocar
+const number = prompt('Coloca tu número: ');
+
+// Llama a la función mandando el número
+const value = checkPalindrome(number);
+
+console.log(value);
