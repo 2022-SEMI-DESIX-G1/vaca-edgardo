@@ -1,0 +1,11 @@
+#response {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.card {
+    padding: 1rem;
+    border: 1px solid grey;
+    margin: 1rem;
+}
