@@ -1,3 +1,27 @@
+#fibonacci {
+    box-shadow: 0 4px 8px 0 #f0f0f0;
+    transition: 0.3s;
+    width: 40%;
+    height: 125px;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 25px;
+    font-family:sans-serif;
+}
+
+h2 {
+    margin-left: 20px;
+  }
+
+label {
+    margin-left: 15px;
+}
+
+input {
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
 #response {
     display: flex;
     flex-direction: row;
@@ -9,3 +33,18 @@
     border: 1px solid grey;
     margin: 1rem;
 }
+
+.submit {
+    float: right;
+    clear: both;
+    margin-right: 15px;
+    margin-bottom: 25px;
+    margin-top: 10px;
+    background-color: #9f0100;
+    border: none;
+    color: white;
+    padding: 5px 60px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+  }
