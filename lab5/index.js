@@ -20,9 +20,14 @@
         handlers: {
             onCardClick: (e) => {
                 if(e.target.className === 'card') {
-                    e.target.remove();
-                }
-            },
+                    var message = confirm(
+                        `¿Deseas eliminarlo?`
+                        );
+                        if (message) {
+                            e.target.remove();
+                        }
+                    }
+                },
             onFormSubmit: (e) => {
                 e.preventDefault();
 
