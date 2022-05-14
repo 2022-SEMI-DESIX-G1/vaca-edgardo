@@ -7,21 +7,26 @@
     <link rel="stylesheet" href="style.css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
     <title>PokéApi</title>
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
   </head>
   <body>
     <div class="template">
-      <section class="form">
+      <section class="section-form">
         <img alt="Logo PokéApi" src="assets/img/logo.png"/>
         <h1>Buscador de Pokemones</h1>
         <p class="paragraph">Busca desde pokemones hasta las habilidades de los mismos.</p>
         <!-- Inicio del form -->
         <form id="pokemon-finder-form">
-          <div class="input">
-            <label for="" class="letters-search">Buscar</label>
+            
+            <!-- Parte izquierda -->
+          <div class="users-touch">
+            <label for="" class="letters-search">Buscar</label> 
             <input id="pokemon-finder-query" class="input" type="text" />
             <button class="hidden" id="clear">Limpiar</button>
           </div>
-          <div class="input">
+          
+          <!-- Parte derecha -->
+          <div class="users-touch">
             <label for="" class="ability-search">Tipo de búsqueda</label>
             <select id="pokemon-finder-search-type" class="input">
                 <option value="pokemon" class="search-option">Pokemon</option>
@@ -31,6 +36,7 @@
           </div>
         </form>
         <!-- Termina el form -->
+
       </section>
       <!-- Recibe el return del index.js -->
       <section id="pokemon-finder-response" class="response"></section>
