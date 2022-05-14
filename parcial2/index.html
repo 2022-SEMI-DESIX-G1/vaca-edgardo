@@ -1,25 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laboratorio #6</title>
-</head>
-<body>
-    <section>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+    <title>PokéApi</title>
+  </head>
+  <body>
+    <div class="template">
+      <section class="form">
+        <img alt="Logo PokéApi" src="assets/img/logo.png"/>
+        <h1>Buscador de Pokemones</h1>
+        <p>Busca desde pokemones hasta las habilidades de los mismos.</p>
+
         <form id="pokemon-finder-form">
-            <label for="">Nombre:</label>
-            <select id="pokemon-finder-search-type">
-                <option value="pokemon">pokemon</option>
-                <option value="ability">ability</option>
+          <div class="input">
+            <label for="">Buscar</label>
+            <input id="pokemon-finder-query" class="input" type="text" />
+            <button id="limpiar">Limpiar</button>
+          </div>
+          <div class="input">
+            <label for="">Tipo de búsqueda</label>
+            <select id="pokemon-finder-search-type" class="input">
+                <option value="pokemon">Pokemon</option>
+                <option value="ability">Habilidad</option>
             </select>
-            <input id="pokemon-finder-query" type="text">
-            <button type="submit">Buscar</button>
+            <button type="submit" id="buscar">Buscar</button>
+          </div>
         </form>
-    </section>
-    <section id="pokemon-finder-response"></section>
-    <script src="utils.js"></script>
-    <script src="index.js"></script>
-</body>
+      </section>
+      <!-- Recibe el return del index.js -->
+      <section id="pokemon-finder-response" class="response"></section>
+      <!-- Scripts a ejecutar de javascript (utils/index) -->
+      <script src="utils.js"></script>
+      <script src="index.js"></script>
+    </div>
+  </body>
 </html>
