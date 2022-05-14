@@ -161,7 +161,7 @@
                      `;
         },
         // Búsqueda por habilidad
-        abilityCard: ({ id, name, pokemon }) => {
+        abilityCard: ({ pokemon }) => {
           const pokemonList = pokemon.map(
             ({ pokemon, is_hidden }) =>
               `<li><a target="_blank" href="">${pokemon.name}${
