@@ -23,10 +23,10 @@ var link_pokeapi = axios.create({
                     baseURL: pokeResponse.data.evolution_chain.url
                 });
 
-                pokeEvolution.get().then(function (evolutionResponse) { 
+                pokeEvolution.get().then(function (evolution) { 
                     let chainEvolution = [];
-                    let evolutionChain  = [[evolutionResponse.data.chain.species.name]];
-                    let evolutionsOfPokemons = [evolutionResponse.data.chain.evolves_to];
+                    let evolutionChain  = [[evolution.data.chain.species.name]];
+                    let evolutionsOfPokemons = [evolution.data.chain.evolves_to];
                     
                     while (evolutionsOfPokemons[0].length !== 0 && evolutionsOfPokemons[0] !== undefined) {
                         chainEvolution = evolutionsOfPokemons.shift();
