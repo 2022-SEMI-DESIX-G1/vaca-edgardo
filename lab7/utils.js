@@ -2,7 +2,6 @@ const link = require('./url.json');
 const axios = require("axios").default
 
 const getFormattedBackendUrl = ({ name, searchType }) => {
-    console.log(`${link.pokeApi}/${searchType}/${name}`);
     return `${link.pokeApi}/${searchType}/${name}`;
 };
 
@@ -18,21 +17,20 @@ const fetch = async ({ url, searchType }) => {
     }
 };
 const getPokemon = async ({ name }) => {
-    const searchType = "pokemon"
-    console.log(name);
+    const searchType = "pokemon";
     return fetch({
       url: getFormattedBackendUrl({ name, searchType }),
       searchType,
     });
   };
   
-  const getEvolution = (url)=>{
-    return fetch({url, searchType: ''})
+  const getEvolution = async (url) => {
+    return await axios.get(url);
   };
 
   module.exports = {
-    getPokemon,
-    getEvolution,
+    getFormattedBackendUrl,
     fetch,
-    getFormattedBackendUrl
+    getPokemon,
+    getEvolution
 }
