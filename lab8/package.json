@@ -1,0 +1,14 @@
+{
+  "name": "lab8",
+  "version": "0.0.1",
+  "description": "Fibonnacci ExpressJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Edgardo Vaca",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
