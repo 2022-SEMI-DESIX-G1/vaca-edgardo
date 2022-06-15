@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poke-Información</title>
+</head>
+<body>
+    <h1>Poke-Información</h1>
+    <p>Nombre:</p>
+    <!-- Form -->
+    <form class="pokemon-form">
+        <input type="checkbox" id="sprites">
+        <label for="sprites"> Sprites</label><br>
+        <input type="checkbox" id="location">
+        <label for="location"> Ubicación</label><br>
+        <input type="checkbox" id="evolution">
+        <label for="evolution"> Cadena de evolución</label><br>
+        <label for="pokemon-input"></label>
+        <input id="pokemon-input" type="text">
+        <button type="submit">Buscar</button>
+    </form>
+    <!-- Redirect to javascript -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>
