@@ -2,6 +2,7 @@
     const App = {
       config: {
         apiBaseUrl: "http://localhost:3000/pokemon",
+        apiEvolutionUrl: "http://localhost:3000",
       },
       htmlElements: {
         form: document.querySelector(".pokemon-form"),
@@ -38,7 +39,11 @@
             App.htmlElements.output.innerHTML = renderTemplates;
           }
           else if(App.htmlElements.evolutionChecked.checked) {
-            const renderTemplates = App.templates.evolutionInfo({data});
+            const responseEvolution = await App.utils.getEvolution({pokemon,});
+            console.log(pokemon);
+            App.htmlElements.evolutionsOfPokemons = responseEvolution;
+            
+            const renderTemplates = App.templates.evolutionInfo({responseEvolution});
             App.htmlElements.output.innerHTML = renderTemplates;
           }
           else {
@@ -83,13 +88,43 @@
         LocationInfo: ({data}) => {
           return `<h1>Location Checked</h1>`;
         },
-        evolutionInfo: (data) => {
-          return `<h1>Evolution Checked</h1>`;
+        evolutionInfo: ({responseEvolution}) => {
+          const evolutionPokemon = App.htmlElements.evolutionsOfPokemons.data;
+          evolutionList = evolutionPokemon.map((component) => {
+            return `<li>${component.name}</li>`; });
+          
+          return `
+          <h1>Evolution</h1>
+          <div>
+            <ul>${evolutionList.join("")}</ul>
+          </div>
+          `
         }
       },
       utils: {
         getUrl: ({ pokemon }) => {
           return `${App.config.apiBaseUrl}/${pokemon}`;
+        },
+        getFormattedBackendUrl: ({ pokemon, searchType }) => {
+          return `${App.config.apiEvolutionUrl}/${searchType}/${pokemon}`;
+        },
+        getEvolution: ({pokemon}) => {
+          const searchType = "evolution";
+          return App.utils.fetch({
+            url: App.utils.getFormattedBackendUrl({ pokemon, searchType }),
+            searchType,
+          });
+        },
+        fetch: async ({ url, searchType }) => {
+          try {
+            const rawResponse = await fetch(url);
+            if (rawResponse.status !== 200) {
+              throw new Error(`${searchType} not found`);
+            }
+            return rawResponse.json();
+          } catch (error) {
+            throw error;
+          }
         },
       },
     };
