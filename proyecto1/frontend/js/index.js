@@ -15,6 +15,7 @@
         locationChecked: document.querySelector('#location'),
         evolutionChecked: document.querySelector('#evolution'),
         evolutionsOfPokemons: [],
+        locationOfPokemons: [],
       },
       init: () => {
         App.htmlElements.form.addEventListener(
@@ -35,12 +36,14 @@
             App.htmlElements.output.innerHTML = renderTemplates;
           } 
           else if(App.htmlElements.locationChecked.checked) {
+            const responseLocation = await App.utils.getLocation({pokemon,});
+            App.htmlElements.locationOfPokemons = responseLocation;
+
             const renderTemplates = App.templates.LocationInfo({data});
             App.htmlElements.output.innerHTML = renderTemplates;
           }
           else if(App.htmlElements.evolutionChecked.checked) {
             const responseEvolution = await App.utils.getEvolution({pokemon,});
-            console.log(pokemon);
             App.htmlElements.evolutionsOfPokemons = responseEvolution;
             
             const renderTemplates = App.templates.evolutionInfo({responseEvolution});
@@ -74,8 +77,8 @@
             var spriteValue = sprites[spriteName];
             if(spriteValue) {
               spriteContent += `
-              <div class="contents">
-                <img src="${spriteValue}" width='100px' height='100px'>
+              <div>
+                <img src="${spriteValue}">
               </div>`;
             }
           }
@@ -86,10 +89,21 @@
           </div>`;          
         },
         LocationInfo: ({data}) => {
-          return `<h1>Location Checked</h1>`;
+          const locationPokemon = App.htmlElements.locationOfPokemons.data;
+          
+          locationList = locationPokemon.map((component) => {
+            return `<p>${component.name}</p>
+                    <p>${component.chance}</p>
+                    <p>${component.method}</p>
+                    <p>${component.version}</p><br>`;   
+          });
+          return `
+          <h1>Location</h1>
+          ${locationList.join("")}`
         },
         evolutionInfo: ({responseEvolution}) => {
           const evolutionPokemon = App.htmlElements.evolutionsOfPokemons.data;
+          console.log(evolutionPokemon);
           evolutionList = evolutionPokemon.map((component) => {
             return `<li>${component.name}</li>`; });
           
@@ -110,6 +124,13 @@
         },
         getEvolution: ({pokemon}) => {
           const searchType = "evolution";
+          return App.utils.fetch({
+            url: App.utils.getFormattedBackendUrl({ pokemon, searchType }),
+            searchType,
+          });
+        },
+        getLocation: ({pokemon}) => {
+          const searchType = "encounters";
           return App.utils.fetch({
             url: App.utils.getFormattedBackendUrl({ pokemon, searchType }),
             searchType,

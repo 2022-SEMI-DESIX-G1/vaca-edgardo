@@ -4,28 +4,36 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Poke-Información</title>
+    <title>Poke-Information</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <h1>Poke-Información</h1>
-    <p>Nombre:</p>
-    <!-- Form -->
-    <form class="pokemon-form">
-        <input type="checkbox" name="checkbox" id="sprites">
-        <label for="sprites"> Sprites</label><br>
-        <input type="checkbox" name="checkbox" id="location">
-        <label for="location"> Ubicación</label><br>
-        <input type="checkbox" name="checkbox" id="evolution">
-        <label for="evolution"> Cadena de evolución</label><br>
-        <label for="pokemon-input"></label>
-        <input id="pokemon-input" type="text">
-        <button type="submit">Buscar</button>
-    </form>
+    <div class="template">
+        <section class="section-form">
+            <img alt="Logo PokéApi" src="assets/img/logo.png"/>
+            <h1>Poke-Information</h1>
+            <p>Nombre:</p>
+            <!-- Form -->
+            <form class="pokemon-form">
+                <input type="checkbox" name="checkbox" id="sprites">
+                <label for="sprites"> Sprites</label><br>
+                <input type="checkbox" name="checkbox" id="location">
+                <label for="location"> Ubicación</label><br>
+                <input type="checkbox" name="checkbox" id="evolution">
+                <label for="evolution"> Cadena de evolución</label><br>
+                <label for="pokemon-input"></label>
+                <input id="pokemon-input" type="text">
+                <button type="submit">Buscar</button>
+            </form>
+        </section>
 
-    <section id="pokemon-finder-response" class="response"></section> <!-- Obtain information of js -->
+        <section id="pokemon-finder-response" class="response"></section> <!-- Obtain information of js -->
 
-    <!-- Redirect to javascript -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="js/index.js"></script>
+        <!-- Redirect to javascript -->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="js/index.js"></script>
+</div>
 </body>
 </html>
