@@ -8,6 +8,9 @@ const axios = require("axios").default;
 const { PORT = 3000 } = process.env;
 
 const CACHE = {};
+const POKEMON_CACHE = {};
+const LOCATION_CACHE = {};
+const EVOLUTION_CACHE = {};
 const ERROR = {};
 
 app.use(cors());
@@ -37,6 +40,59 @@ app.get("/cache", function (req, res) {
     }
     res.json({ name, data: responseData, isCached: false });
   });
+
+  app.get("/evolution/:name", async function (req, res) {
+    const name = req.params.name;
+    var chainEvolution = [];
+    var arrayEvolves = [];
+    const link = `https://pokeapi.co/api/v2/pokemon/`;
+    try {
+      const url = link+`${name}`;
+      if (EVOLUTION_CACHE[name]) {
+        res.json({data: JSON.parse(EVOLUTION_CACHE[name]), isCached: true});
+      } else {
+        let urlInfoResponse = await urlResponse(url);
+        const evolution_chain = await urlResponse(urlInfoResponse.species.url);
+        const chain = await urlResponse(evolution_chain.evolution_chain.url);
+        let allEvolution = [chain.chain.evolves_to];
+        
+        let speciesName = chain.chain.species.name;
+        
+
+        const urlSpeciesName = link+`${speciesName}`;
+
+        let responseInfo = await urlResponse(urlSpeciesName);
+        arrayEvolves.push({name: responseInfo.name});
+              
+        while (allEvolution[0].length !== 0 && allEvolution[0] !== undefined) {
+          chainEvolution = allEvolution.shift();
+          for (const [i] of chainEvolution.entries()) {
+            allEvolution.push(chainEvolution[i].evolves_to);
+    
+                let namesEvolution = chainEvolution[i].species.name;
+                const evolutionUrl = link+`${namesEvolution}`;
+                
+                let responseDataInfo = await urlResponse(evolutionUrl);
+                arrayEvolves.push({name: responseDataInfo.name});
+        }
+        }
+      }
+        res.json({data: arrayEvolves, isCached: false});
+        EVOLUTION_CACHE[name] = JSON.stringify(arrayEvolves);
+    } catch {
+      res.json({data: 'Invalid Pokemon'});
+    }
+  });
+
+  async function urlResponse(url) {
+    try {
+      const { data } = await axios.get(url);
+      response = data;
+    } catch {
+      response = 'Invalid Pokemon';
+    }
+    return response;
+  }
   
   app.listen(PORT, () => {
     console.log(`Running on port ${PORT}...`);
