@@ -1,0 +1,275 @@
+@font-face {
+    font-family: 'Montserrat';
+    font-weight: 900;
+    font-style: normal;
+    src: url('assets/font/Montserrat/Montserrat-Black.ttf') format('truetype');
+}
+
+*{
+    color: black;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: none;
+}
+
+body{
+    background: #031926;
+}
+
+button{
+    background: #19a5f8;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    margin-top: 20px;
+    padding: 6px;
+    text-decoration:dashed;
+    width: 90px;
+}
+
+form{
+    display: flex;
+    height: 100%;
+}
+
+h1{
+    margin: 0px;
+    margin-bottom: 8px;
+}
+h5{
+    margin: 0px;
+    margin-bottom: 5px;
+    font-size: 10px;
+    font-weight: 200;
+}
+
+input[type=checkbox] {
+    vertical-align:-3px;
+}
+
+input[type=text]{
+    border:none;
+    background: rgb(236, 236, 236);
+    border-radius: 4px;
+    padding: 6px;
+}
+
+label{
+    margin-bottom: 2px;
+}
+
+li{
+    margin-left: 50px;
+}
+
+p{
+    margin: 0px;
+}
+
+select{
+    background: rgb(236, 236, 236);
+    border:none;
+    border-radius: 4px;
+    height: 50%;
+    padding: 5px;
+}
+
+ul{
+    margin: 0px;
+    padding: 0px;
+}
+
+#clear {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+#pokemon-finder-form{
+    display: flex;
+}
+
+#pokemon-finder-response{
+    min-width: 500px;
+}
+
+#search{
+    align-self: end; 
+    margin-right: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.ability-card{
+    background: white;
+    display: flex;
+    flex-direction: column;
+    padding-right: 500px;
+    padding: 35px 40px 20px 45px;
+    border: 1px solid black;
+    border-radius: 6px;
+    min-width: 500px;
+}
+
+.ability-info{
+    margin-right: 50px;
+}
+
+.ability-search{
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.center {
+    text-align: center;
+}
+
+.change-margin {
+    margin-left: -30px;
+}
+
+.content{
+    margin: 0px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.content-two{
+    margin: 0px;
+    font-size: 12px;
+}
+
+.error-search{
+    background: white;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 20px;
+    min-width: 500px;
+    text-align: center;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.title-special {
+    margin-top: 15px;
+}
+
+.letters-search {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.no-bold-titles {
+    list-style: disc;
+    font-size: 12px;
+    
+}
+
+.paragraph {
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+.personal-info{
+    display: flex;
+    flex-direction: column;
+    margin-right: 75px;
+}
+
+.personal-info p{
+    margin: 0px;
+}
+
+.pokemon-card{
+    background: white;
+    display: flex;
+    flex-direction: column;
+    padding: 35px 40px 40px 45px;
+    border: 1px solid black;
+    border-radius: 6px;
+    min-width: 500px;
+}
+
+.response-first{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.response-second{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.search-option {
+    font-size: 13px;
+}
+
+.section-form{
+    background: white;
+    display: flex;
+    flex-direction: column;
+    padding: 35px 40px 30px 45px;
+    border: 1px solid black;
+    border-radius: 6px;
+    min-width: 500px;
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.section-form img{
+    position: absolute;
+    top: -67px;
+    left: 160px;
+}
+
+.space {
+    margin-left: -30px;
+}
+
+.sprite{
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin-left: -10px;
+}
+
+.sprite img{
+    width: 100px;
+    height: 120px;
+    position: relative;
+}
+
+.sprite-default{
+    position: absolute;
+    left: -15px;
+}
+
+.sprite-info{
+    display: flex;
+    flex-direction: column;
+}
+
+.subtitle-ability {
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.template{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 80px;
+}
+
+.title-class {
+    font-size: 19px;
+    width: 100%;
+    font-weight: 900;
+}
+
+.users-touch{
+    width: 90%;
+}

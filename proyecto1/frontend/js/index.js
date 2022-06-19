@@ -26,7 +26,8 @@
       handlers: {
         handleFormSubmit: async (e) => {
           e.preventDefault();
-          const pokemon = App.htmlElements.input.value;
+          try {
+            const pokemon = App.htmlElements.input.value;
           const url = App.utils.getUrl({ pokemon });
           const { data } = await axios.post(url);
           console.log({ data });
@@ -53,20 +54,25 @@
             const renderTemplates = App.templates.generalInfo({data});
             App.htmlElements.output.innerHTML = renderTemplates;
           }
-        },
+        } catch (error) {
+          App.htmlElements.output.innerHTML = `<div id="error"><h1 class="error-search">Invalid Pokemon</h1><div>`;
+        }
       },
-      templates: {
+    },
+    templates: {
         generalInfo: ({data, abilities = data.data.abilities}) => {
             abilities = abilities.map((component) =>
             `<li>${component.ability.name[0].toUpperCase()}${component.ability.name.substring(1)} ${
                 component.is_hidden ? App.htmlElements.hidden : "" }</li>` );
             return `
+            <div class="pokemon-card">
             <h1>${data.data.name[0].toUpperCase()}${data.data.name.substring(1)} (${data.data.id})</h1>
-            <p>Weight / Height: <br> ${data.data.weight} / ${data.data.height}</p>
-
+            <p class="content-two"><b>Weight / Height:</b> <br> ${data.data.weight} / ${data.data.height}</p>
+            <br>
             <div class="ability-info">     
               <p class="content">Abilities</p>             
               <ul class="no-bold-titles space">${abilities.join("")}</ul>
+            </div>
             </div>
             `;
         },
@@ -77,14 +83,16 @@
             var spriteValue = sprites[spriteName];
             if(spriteValue) {
               spriteContent += `
-              <div>
-                <img src="${spriteValue}">
+              <div class="sprite-info">
+                  <div class="sprite">
+                    <img src="${spriteValue}" class="sprite-default">
+                  </div>
               </div>`;
             }
           }
           return `
-          <div class="container">
-            <h2>Sprites</h2>
+          <div class="pokemon-card">
+            <h2 class="center">Sprites</h2>
             ${spriteContent}
           </div>`;          
         },
@@ -98,8 +106,10 @@
                     <p>${component.version}</p><br>`;   
           });
           return `
-          <h1>Location</h1>
-          ${locationList.join("")}`
+          <div class="pokemon-card">
+            <h1>Location</h1>
+            ${locationList.join("")}
+          </div>`
         },
         evolutionInfo: ({responseEvolution}) => {
           const evolutionPokemon = App.htmlElements.evolutionsOfPokemons.data;
@@ -108,11 +118,10 @@
             return `<li>${component.name}</li>`; });
           
           return `
-          <h1>Evolution</h1>
-          <div>
+          <div class="pokemon-card">
+            <h1>Evolution Chain</h1>
             <ul>${evolutionList.join("")}</ul>
-          </div>
-          `
+          </div>`
         }
       },
       utils: {
