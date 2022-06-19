@@ -13,19 +13,23 @@
     <div class="template">
         <section class="section-form">
             <img alt="Logo PokéApi" src="assets/img/logo.png"/>
-            <h1>Poke-Information</h1>
-            <p>Nombre:</p>
+            <h1 class="title-special">Poke-Information</h1>
+            <p class="paragraph">Find your favorite pokemon</p>
             <!-- Form -->
             <form class="pokemon-form">
-                <input type="checkbox" name="checkbox" id="sprites">
-                <label for="sprites"> Sprites</label><br>
-                <input type="checkbox" name="checkbox" id="location">
-                <label for="location"> Ubicación</label><br>
-                <input type="checkbox" name="checkbox" id="evolution">
-                <label for="evolution"> Cadena de evolución</label><br>
-                <label for="pokemon-input"></label>
-                <input id="pokemon-input" type="text">
-                <button type="submit">Buscar</button>
+                <div class="users-touch">
+                    <input type="checkbox" name="checkbox" id="sprites" class="letters-search">
+                    <label for="sprites" class="letters-search">Sprites</label><br>
+                    <input type="checkbox" name="checkbox" id="location">
+                    <label for="location" class="letters-search">Location</label><br>
+                    <input type="checkbox" name="checkbox" id="evolution">
+                    <label for="evolution" class="letters-search">Evolution Chain</label><br>
+                </div>
+
+                <div class="users-touch">
+                    <input id="pokemon-input" type="text">
+                    <button type="submit">Search</button>
+                </div>
             </form>
         </section>
 
