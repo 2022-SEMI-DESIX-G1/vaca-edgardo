@@ -137,6 +137,11 @@ ul{
     font-size: 12px;
 }
 
+.content-three{
+    margin: 0px;
+    font-size: 14px;
+}
+
 .error-search{
     background: white;
     border: 1px solid black;
@@ -148,6 +153,10 @@ ul{
 
 .hidden {
     visibility: hidden;
+}
+
+.margin-apart {
+    margin-left: 17px;
 }
 
 .title-special {

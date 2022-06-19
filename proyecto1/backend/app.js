@@ -40,6 +40,7 @@ app.get("/cache", function (req, res) {
   });
 
   app.get("/encounters/:name", async function (req, res) {
+    res.setHeader('X-Foo', 'bar');
     const name = req.params.name;
     const link = `https://pokeapi.co/api/v2/pokemon/`;
     var contentEncounters = [];
