@@ -100,10 +100,10 @@
           const locationPokemon = App.htmlElements.locationOfPokemons.data;
           
           locationList = locationPokemon.map((component) => {
-            return `<p>${component.name}</p>
-                    <p>${component.chance}</p>
-                    <p>${component.method}</p>
-                    <p>${component.version}</p><br>`;   
+            return `<p class="content-three">${component.name}</p>
+                    <p class="content-three">${component.chance}</p>
+                    <p class="content-three">${component.method}</p>
+                    <p class="content-three">${component.version}</p><br>`;   
           });
           return `
           <div class="pokemon-card">
@@ -115,7 +115,7 @@
           const evolutionPokemon = App.htmlElements.evolutionsOfPokemons.data;
           console.log(evolutionPokemon);
           evolutionList = evolutionPokemon.map((component) => {
-            return `<li>${component.name}</li>`; });
+            return `<li class="content-two margin-apart">${component.name}</li>`; });
           
           return `
           <div class="pokemon-card">
