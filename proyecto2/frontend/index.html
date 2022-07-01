@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poke-Information</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+    <link rel="icon" href="assets/img/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="template">
+        <section class="section-form">
+            <img alt="Logo PokéApi" src="assets/img/logo.png"/>
+            <h1 class="title-special">Poke-Information</h1>
+            <p class="paragraph">Find your favorite pokemon</p>
+            <!-- Form -->
+            <form class="pokemon-form">
+                <div class="users-touch">
+                    <input type="checkbox" name="checkbox" id="sprites" class="letters-search">
+                    <label for="sprites" class="letters-search">Sprites</label><br>
+                    <input type="checkbox" name="checkbox" id="location">
+                    <label for="location" class="letters-search">Location</label><br>
+                    <input type="checkbox" name="checkbox" id="evolution">
+                    <label for="evolution" class="letters-search">Evolution Chain</label><br>
+                </div>
+
+                <div class="users-touch">
+                    <input id="pokemon-input" type="text">
+                    <button type="submit">Search</button>
+                </div>
+            </form>
+        </section>
+
+        <section id="pokemon-finder-response" class="response"></section> <!-- Obtain information of js -->
+
+        <!-- Redirect to javascript -->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="js/index.js"></script>
+</div>
+</body>
+</html>
