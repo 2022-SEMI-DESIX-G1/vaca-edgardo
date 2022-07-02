@@ -1,9 +1,5 @@
-7(() => {
+(() => {
     const App = {
-      config: {
-        apiBaseUrl: "http://localhost:3000/pokemon",
-        apiEvolutionUrl: "http://localhost:3000",
-      },
       htmlElements: {
         form: document.querySelector(".pokemon-form"),
         input: document.querySelector("#pokemon-input"),
@@ -14,8 +10,10 @@
         spritesChecked: document.querySelector('#sprites'),
         locationChecked: document.querySelector('#location'),
         evolutionChecked: document.querySelector('#evolution'),
-        evolutionsOfPokemons: [],
-        locationOfPokemons: [],
+        sprites: ``,
+        encounters: ``,
+        evolutions: ``,
+        generals: ``,
       },
       init: () => {
         App.htmlElements.form.addEventListener(
@@ -26,137 +24,151 @@
       handlers: {
         handleFormSubmit: async (e) => {
           e.preventDefault();
+
+          const query = App.htmlElements.input.value.toLowerCase();
+          
           try {
-            const pokemon = App.htmlElements.input.value;
-          const url = App.utils.getUrl({ pokemon });
-          const { data } = await axios.post(url);
-          console.log({ data });
-
-          if (App.htmlElements.spritesChecked.checked) {
-            const renderTemplates = App.templates.spritesInfo({data});
-            App.htmlElements.output.innerHTML = renderTemplates;
-          } 
-          else if(App.htmlElements.locationChecked.checked) {
-            const responseLocation = await App.utils.getLocation({pokemon,});
-            App.htmlElements.locationOfPokemons = responseLocation;
-
-            const renderTemplates = App.templates.LocationInfo({data});
-            App.htmlElements.output.innerHTML = renderTemplates;
-          }
-          else if(App.htmlElements.evolutionChecked.checked) {
-            const responseEvolution = await App.utils.getEvolution({pokemon,});
-            App.htmlElements.evolutionsOfPokemons = responseEvolution;
+            const data = await App.utils.getPokemon({
+              query,
+            });
             
-            const renderTemplates = App.templates.evolutionInfo({responseEvolution});
-            App.htmlElements.output.innerHTML = renderTemplates;
+            App.htmlElements.generals = App.templates.general(data.infoPokemon);
+            
+            if (App.htmlElements.spritesChecked.checked) {
+              App.htmlElements.sprites = App.templates.sprites(data.infoPokemon);
+            } else {
+              App.htmlElements.sprites = ``;
+            }
+
+            if(App.htmlElements.locationChecked.checked) {
+              App.htmlElements.encounters = App.templates.encounters(data.infoPokemon);
+            }
+            else {
+              App.htmlElements.encounters = ``;
+            }
+
+            if(App.htmlElements.evolutionChecked.checked) {
+              App.htmlElements.evolutions = App.templates.evolutions(data.infoPokemon);
+            }
+            else {
+              App.htmlElements.evolutions = ``;
           }
-          else {
-            const renderTemplates = App.templates.generalInfo({data});
-            App.htmlElements.output.innerHTML = renderTemplates;
-          }
+          App.htmlElements.output.innerHTML = App.htmlElements.generals + App.htmlElements.sprites + App.htmlElements.evolutions + App.htmlElements.encounters;
         } catch (error) {
+          console.log(error);
           App.htmlElements.output.innerHTML = `<div id="error"><h1 class="error-search">Invalid Pokemon</h1><div>`;
         }
       },
     },
     templates: {
-        generalInfo: ({data, abilities = data.data.abilities}) => {
-            abilities = abilities.map((component) =>
-            `<li>${component.ability.name[0].toUpperCase()}${component.ability.name.substring(1)} ${
-                component.is_hidden ? App.htmlElements.hidden : "" }</li>` );
+      general: ({ id, name, weight, height, abilities, date }) => {
+        abilities = abilities.map(
+          (element) =>
+            `<li>${element.ability.name} ${
+              element.is_hidden ? App.htmlElements.hidden : ""
+            }</li>`
+            );
             return `
             <div class="pokemon-card">
-            <h1>${data.data.name[0].toUpperCase()}${data.data.name.substring(1)} (${data.data.id})</h1>
-            <p class="content-two"><b>Weight / Height:</b> <br> ${data.data.weight} / ${data.data.height}</p>
+            <h1>${name[0].toUpperCase()}${name.substring(1)} (${id})</h1>
+            <p class="content-two"><b>Weight / Height:</b> <br> ${weight} / ${height}</p>
             <br>
             <div class="ability-info">     
               <p class="content">Abilities</p>             
-              <ul class="no-bold-titles space">${abilities.join("")}</ul>
+              <ul class="no-bold-titles space">${abilities.join("")}</ul><br>
+              <p class="content">Time: ${date}</p>
             </div>
             </div>
             `;
         },
-        spritesInfo: ({data, sprites = data.data.sprites}) =>{
-          var spriteContent = '';
-          for(var i = 0; i < Object.keys(sprites).length - 2; i++){
-            var spriteName = Object.keys(sprites)[i];
-            var spriteValue = sprites[spriteName];
-            if(spriteValue) {
-              spriteContent += `
-              <div class="sprite-info">
-                  <div class="sprite">
-                    <img src="${spriteValue}" class="sprite-default">
-                  </div>
-              </div>`;
+        encounters: ({ encounters }) => {
+          const store = [];
+          encounters.map((component) => {
+            store.push(`<br><h4>${component.location_area.name}</h4><hr>`);
+            component.version_details.map((detail) => {
+              store.push(
+                `<strong><i><h4>&nbsp&nbsp&nbsp&nbsp&nbsp ${detail.version.name[0].toUpperCase()}${detail.version.name.substring(1)}</h4></i></strong>`
+              );
+              detail.encounter_details.map((detail) => {
+                store.push(
+                  `<li class="content-two margin-apart">&nbsp&nbsp&nbsp&nbsp&nbsp${detail.method.name} (${detail.chance})</li>`
+                );
+              });
+            });
+          });
+  
+          return `
+                <div class="pokemon-card">
+                <h1>Encounters</h1>
+                <div>
+                ${store.join("")}
+                </div>
+                </div>
+          `;
+        },
+        sprites: ({ sprites }) => {
+          const sprite = Object.keys(sprites[0]);
+          const arraySprite = [];
+          sprite.map((component, i) => {
+            if (sprites[0][component] != null && i < 8) {
+              arraySprite.push(
+                `<img src="${sprites[0][component]}"/>`
+              );
             }
-          }
-          return `
-          <div class="pokemon-card">
-            <h2 class="center">Sprites</h2>
-            ${spriteContent}
-          </div>`;          
-        },
-        LocationInfo: ({data}) => {
-          const locationPokemon = App.htmlElements.locationOfPokemons.data;
-          
-          locationList = locationPokemon.map((component) => {
-            return `<p class="content-three">${component.name}</p>
-                    <p class="content-three">${component.chance}</p>
-                    <p class="content-three">${component.method}</p>
-                    <p class="content-three">${component.version}</p><br>`;   
           });
           return `
-          <div class="pokemon-card">
-            <h1>Location</h1>
-            ${locationList.join("")}
-          </div>`
+          <div class="sprites pokemon-card">
+          <h1>Sprites</h1>
+              <div>${arraySprite.join("")}</div>
+          </div>`;
         },
-        evolutionInfo: ({responseEvolution}) => {
-          const evolutionPokemon = App.htmlElements.evolutionsOfPokemons.data;
-          console.log(evolutionPokemon);
-          evolutionList = evolutionPokemon.map((component) => {
-            return `<li class="content-two margin-apart">${component.name}</li>`; });
-          
-          return `
-          <div class="pokemon-card">
-            <h1>Evolution Chain</h1>
-            <ul>${evolutionList.join("")}</ul>
-          </div>`
-        }
-      },
-      utils: {
-        getUrl: ({ pokemon }) => {
-          return `${App.config.apiBaseUrl}/${pokemon}`;
-        },
-        getFormattedBackendUrl: ({ pokemon, searchType }) => {
-          return `${App.config.apiEvolutionUrl}/${searchType}/${pokemon}`;
-        },
-        getEvolution: ({pokemon}) => {
-          const searchType = "evolution";
-          return App.utils.fetch({
-            url: App.utils.getFormattedBackendUrl({ pokemon, searchType }),
-            searchType,
-          });
-        },
-        getLocation: ({pokemon}) => {
-          const searchType = "encounters";
-          return App.utils.fetch({
-            url: App.utils.getFormattedBackendUrl({ pokemon, searchType }),
-            searchType,
-          });
-        },
-        fetch: async ({ url, searchType }) => {
-          try {
-            const rawResponse = await fetch(url);
-            if (rawResponse.status !== 200) {
-              throw new Error(`${searchType} not found`);
-            }
-            return rawResponse.json();
-          } catch (error) {
-            throw error;
-          }
+        evolutions: ({ evolesArray }) => {
+          evolution = evolesArray.map(
+            (component) =>
+              `<li class="content-two margin-apart">${component.species.name} ${
+                component.is_baby ? App.htmlElements.baby : ""}</li> `
+          );
+          return ` <div class="pokemon-card">
+                        <h1>Evolution Chain</h1>
+                        <ul>${evolution.join("")}</ul>
+                    </div>`;
         },
       },
+        utils: {
+          settings: {
+            backendBaseUrl: "http://localhost:3000/api/pokemon",
+            options:  {
+              method: 'POST',
+              headers: {
+              'Content-Type': 'application/json',
+              },
+            }
+          },
+          getFormattedBackendUrl: ({ query }) => {
+            return `${App.utils.settings.backendBaseUrl}/${query}`;
+          },
+          getPokemon: ({ query }) => {
+            return App.utils.fetch({
+              url: App.utils.getFormattedBackendUrl({ query })
+            });
+          },
+          getEvolution:  (url)=>{
+            return App.utils.fetch({url})
+          },
+          fetch: async ({ url }) => {
+            //console.log(url);
+            try {
+              const rawResponse = await fetch(url, App.utils.settings.options);
+              //console.log(rawResponse)
+              if (rawResponse.status !== 200) {   
+                throw new Error(`${url} not found`);
+              }
+              return rawResponse.json();
+            } catch (error) {
+              throw error;
+            }
+          },
+        },
     };
     App.init();
   })();
