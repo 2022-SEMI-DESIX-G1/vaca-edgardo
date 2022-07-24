@@ -3,7 +3,6 @@
         htmlElements: {
           documentDOM: document,
           responsePost: document.querySelector("#responsePost"),
-          idDOM: document.querySelector("#id"),
           role: sessionStorage.getItem("role"),
           dataPedidos: [],
       },
@@ -91,15 +90,18 @@
                                         </tr>
                                         ${celdas} 
                                     </thead>`;
-                let tarjeta = `<div class="container">
-                                  <H4>Detalle de Pedidos</H4>
+                let tarjeta = `
+                              <br>
+                              <div class="container">
+                                  <H4>Detalle de Pedidos</H4><br>
                                   <div class="d-flex justify-content-center align-items-center">
                                       <table class="table table-sm table-bordered">
                                           ${contenido_tabla}
                                       </table>
                                   </div>
-                              </div>`;
-                App.htmlElements.idDOM.innerHTML = tarjeta;
+                              </div>
+                              <br>`;
+                return tarjeta;
         },
         errorCard: () => console.log("no trae los pedidos"),
         notLoggedCard: () => `<div class="container">
