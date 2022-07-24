@@ -97,6 +97,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                     <a class="nav-item nav-link active" href="index.html">Inicio<span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="pedidos.html">Pedidos</a>
                     <a class="nav-item nav-link" href="../add_product.html">Productos</a>
                     <a class="nav-item nav-link" href="../add_user.html">Usuarios</a>
                     <a class="nav-item nav-link" href="../logout.html">Cerrar sesión</a>
