@@ -6,12 +6,6 @@
     getFormattedBackendUrl: ({ query }) => {
       return `${Utils.settings.backendBaseUrl}/${query}`;
     },
-    // getYappy: ( {paramYappy} ) => {
-    //   query = "yappy"
-    //   const response = axios.post(Utils.getFormattedBackendUrl( {query} ), paramYappy);
-    //   console.log(response);
-    //   return response;
-    // },
     getYappy: async ({paramYappy}) => {
       query = "yappy"
       const response = axios.post(Utils.getFormattedBackendUrl( {query} ), paramYappy);
