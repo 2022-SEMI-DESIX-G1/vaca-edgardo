@@ -9,10 +9,6 @@ router.get('/', buscarUsuarios);
 
 router.post('/one/', buscarUsuario);
 
-// router.get('/one/', [check('email', 'El email es obligatorio').isEmail(),
-//                     validarCampos,
-//                     ],buscarUsuario);
-
 router.post('/', [
                     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
                     check('password', 'El password es obligatorio').not().isEmpty(),
